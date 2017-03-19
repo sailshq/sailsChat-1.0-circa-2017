@@ -11,8 +11,60 @@
 
 module.exports.bootstrap = function(cb) {
 
-  // It's very important to trigger this callback method when you are finished
-  // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
-  return cb();
+  User.createEach([
+    {
+      username: 'sgress454',
+      online: true
+    },
+    {
+      username: 'mikermcneil',
+      online: true
+    },
+    {
+      username: 'particlebanana',
+      online: true
+    },
+    {
+      username: 'rachaelshaw',
+      online: true
+    },
+    {
+      username: 'irlnathan',
+      online: false
+    }
+  ])
+  .meta({fetch: true})
+  .exec(function(err, users) {
+
+    var indexedUsers = _.indexBy(users, 'username');
+
+    ChatMessage.createEach([
+      {
+        user: indexedUsers.sgress454.id,
+        text: 'Howdy everyone'
+      },
+      {
+        user: indexedUsers.mikermcneil.id,
+        text: 'What\'s up'
+      },
+      {
+        text: 'rachaelshaw joined the room'
+      },
+      {
+        user: indexedUsers.rachaelshaw.id,
+        text: 'Chatz f\'real'
+      },
+      {
+        user: indexedUsers.mikermcneil.id,
+        text: 'f\'real'
+      },
+      {
+        user: indexedUsers.particlebanana.id,
+        text: 'f\'real'
+      }
+
+    ]).exec(cb);
+
+  });
 
 };
