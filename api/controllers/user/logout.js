@@ -32,6 +32,24 @@ module.exports = {
       // Log the user out by removing the userId from the session.
       env.req.session.userId = null;
 
+      // Create an admin chat message.
+      ChatMessage.create({
+        text: user.username + ' left the room.'
+      })
+      .meta({fetch: true})
+      .exec(function(err, message) {
+        if (err) { return exits.serverError(err); }
+
+        // Blast that message out to all sockets (except the sender).
+        sails.sockets.blast('chatmessage', {
+          verb: 'created',
+          id: message.id,
+          data: {
+            text: message.text
+          }
+        }, env.req);
+      });
+
       // Return through the `success` exit.
       return exits.success();
 

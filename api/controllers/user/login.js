@@ -44,6 +44,23 @@ module.exports = {
       // Set the user ID in the session.
       env.req.session.userId = user.id;
 
+      // Create an admin chat message.
+      ChatMessage.create({
+        text: user.username + ' joined the room.'
+      })
+      .meta({fetch: true})
+      .exec(function(err, message) {
+        if (err) { return exits.serverError(err); }
+        // Blast the message to all connected sockets.
+        sails.sockets.blast('chatmessage', {
+          verb: 'created',
+          id: message.id,
+          data: {
+            text: message.text
+          }
+        });
+      });
+
       // Return the logged-in user info through the `success` exit.
       return exits.success(user);
 
