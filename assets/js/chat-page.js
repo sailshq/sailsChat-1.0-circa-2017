@@ -71,11 +71,17 @@ $(function() {
           case 'updated':
             var user = _.find(app.users, {id: notification.id});
 
+            // If the updated user is the same as the logged in user, and they are
+            // no longer online, reload the page.  This will log this client out and
+            // show the login page.
             if (user.id === app.loggedInUserId && notification.data.online === false) {
               return window.location.reload();
             }
 
+            // Update the user in our internal data.
             user.online = notification.data.online;
+
+            // Update the user display in the list.
             userList.updateUserStatus(notification.id, notification.data.online);
 
         }
@@ -101,6 +107,30 @@ $(function() {
 
   });
 
+  //  ┬ ┬┌─┐┌┐┌┌┬┐┬  ┌─┐  ╦ ╦╦  ┌─┐┬  ┬┌─┐┌┐┌┌┬┐┌─┐
+  //  ├─┤├─┤│││ │││  ├┤   ║ ║║  ├┤ └┐┌┘├┤ │││ │ └─┐
+  //  ┴ ┴┴ ┴┘└┘─┴┘┴─┘└─┘  ╚═╝╩  └─┘ └┘ └─┘┘└┘ ┴ └─┘
+
+  // Handle clicking the `logout` link.
+  $('.chat-page .logout').click(function() {
+
+    // Update the user's online status.
+    io.socket.patch('/user/' + app.loggedInUserId, { online: false }, function(body, response) {
+
+      // Handle errors.
+      if (response.statusCode !== 200) {
+        alert('An error occurred logging you out.  Please try again.');
+        return;
+      }
+
+      // Log the user out, and reload the page.
+      io.socket.put('/user/logout', {}, function (body, response) {
+        window.location.reload();
+      });
+
+    });
+
+  });
 
   //  ┬ ┬┌┬┐┬┬  ┬┌┬┐┬ ┬  ┌─┐┬ ┬┌┐┌┌─┐┌┬┐┬┌─┐┌┐┌┌─┐
   //  │ │ │ ││  │ │ └┬┘  ├┤ │ │││││   │ ││ ││││└─┐
