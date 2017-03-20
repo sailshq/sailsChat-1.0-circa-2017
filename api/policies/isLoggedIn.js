@@ -8,15 +8,30 @@
  */
 module.exports = function isLoggedIn(req, res, next) {
 
-  // If `req.session.userId` is set, then we know that this request originated
-  // from a logged-in user.  So we can safely proceed to the next policy--
-  // or, if this is the last policy, the relevant action.
+  // Check that there is a user ID in the session.
   if (req.session.userId) {
-    return next();
+
+    // Look up the user whose ID is in the session.
+    User.findOne({id: req.session.userId}).exec(function(err, user) {
+      if (err) { return res.serverError(err);}
+      if (!user) { return res.forbidden(); }
+
+      // If the user is not online, remove their ID from the session and return a 404.
+      if (!user.online) {
+        req.session.userId = null;
+        return res.forbidden();
+      }
+
+      // User is logged in, so we can continue!
+      return next();
+    });
+
+    return;
+
   }
 
   //--•
-  // Otherwise, this request did not come from a logged-in user.
+  // No user is logged in, so return the "forbidden" response.
   return res.forbidden();
 
 };
