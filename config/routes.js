@@ -22,6 +22,8 @@ module.exports.routes = {
 
   '/': 'index',
 
+  'PUT /user/login': 'user/login',
+  'PUT /user/logout': 'user/logout'
 
 
   /***************************************************************************
