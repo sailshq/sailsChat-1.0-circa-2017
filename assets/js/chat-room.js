@@ -16,6 +16,9 @@ function ChatRoom (app) {
   // Save a reference to the app's message list.
   this.messages = app.messages;
 
+  // Save a reference to the app's logged in user.
+  this.loggedInUserId = app.loggedInUserId;
+
 }
 
 /**
@@ -36,15 +39,12 @@ ChatRoom.prototype.init = function(messages) {
     var msg = $('.chat-input').val();
     // If no message was entered, do nothing.
     if (!msg) { return; }
-    // TODO
-    // Create a chat message via the API.
-    return cb(undefined, {
-      id: 123,
-      user: {
-        id: 1,
-        username: 'sgress454'
-      },
-      text: msg
+    // Create a new chat message via the API.
+    io.socket.post('/chatmessage', { user: self.loggedInUserId, text: msg}, function(body, response) {
+      if (response.statusCode !== 200) {
+        return alert('An error occurred sending your chat.  Please try again.');
+      }
+      return cb(undefined, body);
     });
   }
 
