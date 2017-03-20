@@ -52,6 +52,51 @@ $(function() {
       // Initialize the new user list.
       userList.init();
 
+      //  ┬ ┬┌─┐┌┐┌┌┬┐┬  ┌─┐  ┌─┐┌─┐┌─┐┬┌─┌─┐┌┬┐  ┌┐┌┌─┐┌┬┐┬┌─┐┬┌─┐┌─┐┌┬┐┬┌─┐┌┐┌┌─┐
+      //  ├─┤├─┤│││ │││  ├┤   └─┐│ ││  ├┴┐├┤  │   ││││ │ │ │├┤ ││  ├─┤ │ ││ ││││└─┐
+      //  ┴ ┴┴ ┴┘└┘─┴┘┴─┘└─┘  └─┘└─┘└─┘┴ ┴└─┘ ┴   ┘└┘└─┘ ┴ ┴└  ┴└─┘┴ ┴ ┴ ┴└─┘┘└┘└─┘
+
+      // When a `user` event is received, handle it.
+      io.socket.on('user', function(notification) {
+
+        switch (notification.verb) {
+
+          // If a new user was created, add it to the app and to the user list.
+          case 'created':
+            userList.addNewUserToList(notification.data);
+            app.users.push(notification.data);
+            break;
+
+          // If a user was updated, update their status in the user list.
+          case 'updated':
+            var user = _.find(app.users, {id: notification.id});
+
+            if (user.id === app.loggedInUserId && notification.data.online === false) {
+              return window.location.reload();
+            }
+
+            user.online = notification.data.online;
+            userList.updateUserStatus(notification.id, notification.data.online);
+
+        }
+
+      });
+
+      // When a `chatmessage` event is received, handle it.
+      io.socket.on('chatmessage', function(notification) {
+
+        switch (notification.verb) {
+
+          // If a new chat was created, add it to the app and to the transcript.
+          case 'created':
+            chatRoom.renderMessage(notification.data);
+            app.messages.push(notification.data);
+            break;
+
+        }
+
+      });
+
     });
 
   });
