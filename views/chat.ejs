@@ -1,0 +1,35 @@
+<%- exposeLocalsToBrowser(); %>
+<script src="/js/chat-room.js"></script>
+<script src="/js/user-list.js"></script>
+<script src="/js/chat-page.js"></script>
+
+    <div class="chat-page">
+
+      <div class="header">
+        <h1>Welcome to SailsChat, <%= username %>!</h1>
+        <span class="logout">click here to log out</span>
+      </div>
+
+      <div class="main">
+
+        <div class="chat-room-section">
+          <div class="chat-transcript-container">
+            <div class="chat-transcript"></div>
+          </div>
+          <div class="chat-controls-container">
+            <div class="chat-controls">
+              <input class="chat-input" type="text" placeholder="Enter a message..." />
+              <button class="send-chat-button">Send chat</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="user-list-section">
+          <div class="header">Users</div>
+          <ul class="user-list">
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
