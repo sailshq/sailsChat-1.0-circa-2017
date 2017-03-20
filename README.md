@@ -1,6 +1,6 @@
-# sails-chat-1-0
+# sailsChat 1.0
 
-a [Sails](http://sailsjs.com) application
+An example of using the built-in PubSub features of Sails to build a simple realtime chat.  See [the accompanying tutorial video]() to learn more!
 
 
 ### Links
