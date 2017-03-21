@@ -23,5 +23,13 @@
     "url": "git://github.com/scottmac/sails-chat-1-0.git"
   },
   "author": "scottmac",
-  "license": ""
+  "license": "",
+  "devDependencies": {
+    "clean-webpack-plugin": "^0.1.16",
+    "css-loader": "^0.27.3",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.1",
+    "webpack": "^2.2.1"
+  }
 }
