@@ -7,6 +7,9 @@
  *
  */
 
+var $ = require('../dependencies/jquery.js');
+var _ = require('../dependencies/lodash.min.js');
+
 /**
  * Constructor
  * @param {object} app A reference to the main chat page app.
@@ -16,6 +19,8 @@ function UserList (app) {
   this.users = app.users;
 
 }
+
+module.exports = UserList;
 
 /**
  * Initialize the user list component.

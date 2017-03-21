@@ -7,6 +7,10 @@
  *
  */
 
+var io = require('../dependencies/sockets.js');
+var $ = require('../dependencies/jquery.js');
+var _ = require('../dependencies/lodash.min.js');
+
 /**
  * Constructor
  * @param {object} app A reference to the main chat page app.
@@ -20,6 +24,8 @@ function ChatRoom (app) {
   this.loggedInUserId = app.loggedInUserId;
 
 }
+
+module.exports = ChatRoom;
 
 /**
  * Initialize the chat room component.

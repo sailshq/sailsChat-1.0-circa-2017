@@ -7,6 +7,12 @@
  *
  */
 
+var io = require('../dependencies/sockets.js');
+var $ = require('../dependencies/jquery.js');
+var _ = require('../dependencies/lodash.min.js');
+var ChatRoom = require('./chat-room.js');
+var UserList = require('./user-list.js');
+
 // Run after page load.
 $(function() {
 

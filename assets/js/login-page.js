@@ -6,6 +6,10 @@
  *
  */
 
+var io = require('../dependencies/sockets.js');
+var $ = require('../dependencies/jquery.js');
+var _ = require('../dependencies/lodash.min.js');
+
 $(function() {
 
   //  ┬ ┬┌─┐┌┐┌┌┬┐┬  ┌─┐  ╦ ╦╦  ┌─┐┬  ┬┌─┐┌┐┌┌┬┐┌─┐
