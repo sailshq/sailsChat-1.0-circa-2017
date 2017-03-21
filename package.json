@@ -5,12 +5,12 @@
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
-    "sails": "^1.0.0-31",
+    "async": "2.0.1",
     "grunt": "1.0.1",
-    "sails-hook-orm": "^2.0.0-0",
-    "sails-hook-sockets": "^1.0.1",
     "lodash": "3.10.1",
-    "async": "2.0.1"
+    "sails": "^1.0.0-31",
+    "sails-hook-orm": "^2.0.0-0",
+    "sails-hook-sockets": "^1.0.1"
   },
   "scripts": {
     "start": "NODE_ENV=production node app.js",
@@ -30,6 +30,8 @@
     "extract-text-webpack-plugin": "^2.1.0",
     "less": "^2.7.2",
     "less-loader": "^4.0.1",
-    "webpack": "^2.2.1"
+    "webpack": "^2.2.1",
+    "sails.io.js": "^1.1.9",
+    "socket.io-client": "^1.7.3"
   }
 }
