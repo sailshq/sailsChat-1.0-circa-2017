@@ -9,7 +9,6 @@
     "grunt": "1.0.1",
     "sails-hook-orm": "^2.0.0-0",
     "sails-hook-sockets": "^1.0.1",
-    "sails-hook-grunt": "^1.0.4",
     "lodash": "3.10.1",
     "async": "2.0.1"
   },
