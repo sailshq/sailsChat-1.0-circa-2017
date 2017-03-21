@@ -1,6 +1,6 @@
 # sailsChat 1.0
 
-An example of using the built-in PubSub features of Sails to build a simple realtime chat.  See [the accompanying tutorial video]() to learn more!
+An example of using the built-in PubSub features of Sails to build a simple realtime chat.  See [the accompanying tutorial video](https://www.youtube.com/watch?v=6KOBdsYlVnQ) to learn more!
 
 
 ### Links
