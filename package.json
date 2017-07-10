@@ -26,12 +26,13 @@
   "license": "",
   "devDependencies": {
     "clean-webpack-plugin": "^0.1.16",
+    "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.27.3",
     "extract-text-webpack-plugin": "^2.1.0",
     "less": "^2.7.2",
     "less-loader": "^4.0.1",
-    "webpack": "^2.2.1",
     "sails.io.js": "^1.1.9",
-    "socket.io-client": "^1.7.3"
+    "socket.io-client": "^1.7.3",
+    "webpack": "^2.2.1"
   }
 }

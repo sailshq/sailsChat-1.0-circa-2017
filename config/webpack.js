@@ -21,6 +21,18 @@ module.exports.webpack = {
       }
     ]
   },
+  loaders: [
+    {
+      test: /\.ejs$/,
+      loader: 'ejs-loader',
+      query: {
+        variable: 'data',
+        interpolate : '\\{%=([\s\S]+?)%\\}',
+        escape : '\\{%-([\s\S]+?)%\\}',
+        evaluate : '\\{%([\s\S]+?)%\\}',
+      }
+    },
+  ],
   // Use the plugin to specify the resulting filename (and add needed behavior to the compiler)
   plugins: [
     new ExtractTextPlugin('styles/[name].css'),
@@ -28,6 +40,11 @@ module.exports.webpack = {
       root: path.resolve(__dirname, '.tmp'),
       verbose: true,
       dry: false
+    }),
+    new HtmlWebpackPlugin({  // Also generate a test.html
+      filename: 'views/layout.ejs',
+      template: 'views/layout.ejs'
     })
+
   ]
 };
